@@ -9,9 +9,10 @@ app.get('/', (req, res) => {
 const socketio = require('socket.io')(http);
 
 socketio.on('connection', userSocket => {
-  console.log('Alguem conectou!');
-  console.log(userSocket);
+  console.log('Alguem conectou!' + userSocket.id);
+  // console.log(userSocket);
   userSocket.on('send_message', data => {
+    console.log(data);
     userSocket.broadcast.emit('receive_message', data);
   });
 });
